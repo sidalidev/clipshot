@@ -1,0 +1,20 @@
+<resources>
+    <string name="tagline">Appuie sur les deux boutons. Ta capture est déjà dans le presse-papiers.</string>
+    <string name="clip_label">Capture d\'écran</string>
+    <string name="access_title">Une seule autorisation</string>
+    <string name="access_body">Clipshot doit voir les nouvelles captures pour les copier. Choisis « Tout autoriser » : il ne lit rien d\'autre et n\'a pas accès à Internet.</string>
+    <string name="access_button">Autoriser</string>
+    <string name="access_settings">Ouvrir les réglages</string>
+    <string name="status_on">Activé</string>
+    <string name="status_on_body">Chaque capture part dans le presse-papiers</string>
+    <string name="status_off">En pause</string>
+    <string name="status_off_body">Les captures ne sont pas copiées</string>
+    <string name="last_copied">Dernière copie</string>
+    <string name="none_yet">Rien pour l\'instant</string>
+    <string name="none_yet_body">Fais une capture pour essayer</string>
+    <plurals name="count">
+        <item quantity="one">%d capture copiée</item>
+        <item quantity="other">%d captures copiées</item>
+    </plurals>
+    <string name="privacy">Aucun accès à Internet. Aucun compte. Aucun pistage.\nRien ne quitte ton téléphone.</string>
+</resources>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Clipshot</string>
+    <string name="tagline">Press the two buttons. Your screenshot is already on the clipboard.</string>
+    <string name="clip_label">Screenshot</string>
+    <string name="access_title">One permission, that\'s all</string>
+    <string name="access_body">Clipshot needs to see new screenshots to copy them. Choose \"Allow all\": it never reads anything else, and it has no internet access.</string>
+    <string name="access_button">Allow</string>
+    <string name="access_settings">Open settings</string>
+    <string name="status_on">On</string>
+    <string name="status_on_body">Every screenshot goes to the clipboard</string>
+    <string name="status_off">Paused</string>
+    <string name="status_off_body">Screenshots are not copied</string>
+    <string name="last_copied">Last copied</string>
+    <string name="none_yet">Nothing yet</string>
+    <string name="none_yet_body">Take a screenshot to try it</string>
+    <plurals name="count">
+        <item quantity="one">%d screenshot copied</item>
+        <item quantity="other">%d screenshots copied</item>
+    </plurals>
+    <string name="privacy">No internet permission. No account. No tracking.\nNothing ever leaves your phone.</string>
+</resources>
