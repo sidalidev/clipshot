@@ -14,13 +14,15 @@ jobs:
         with: { distribution: temurin, java-version: '21' }
       # The Ubuntu runner ships the Android SDK; Gradle fetches the platform it needs.
       - name: Unit tests, lint, release build (unsigned)
-        run: ./gradlew --no-daemon :app:testDebugUnitTest :app:lintRelease :app:assembleRelease -Punsigned
+        run: ./gradlew --no-daemon :app:testFullDebugUnitTest :app:lintFullRelease :app:lintPlayRelease :app:assembleFullRelease :app:assemblePlayRelease -Punsigned
       - name: No internet permission, ever
         run: |
-          m=$(find app/build/intermediates -path '*release*' -name AndroidManifest.xml | head -1)
-          echo "Checking $m"
-          if grep -q 'android.permission.INTERNET' "$m"; then echo "INTERNET permission found"; exit 1; fi
+          for m in $(find app/build/intermediates/merged_manifest -name AndroidManifest.xml); do
+            echo "Checking $m"
+            if grep -q 'android.permission.INTERNET' "$m"; then echo "INTERNET permission found"; exit 1; fi
+          done
+          if grep -q MANAGE_EXTERNAL_STORAGE app/build/intermediates/merged_manifest/playRelease/*/AndroidManifest.xml; then echo "Play build must not ask for All files access"; exit 1; fi
       - uses: actions/upload-artifact@v4
         with:
           name: clipshot-unsigned
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/*/release/*.apk

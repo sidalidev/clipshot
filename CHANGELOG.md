@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Google Play build (same app, without the "remove from gallery" mode, which Play does not allow). Nothing changes for GitHub, Obtainium and F-Droid users.
+
 ## 1.1.0
 
 - Remove from gallery (optional): the screenshot is deleted from your photos one minute after the copy.

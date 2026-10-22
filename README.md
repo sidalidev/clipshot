@@ -48,10 +48,12 @@ The whole app is about 600 lines of Kotlin. Read `Rules.kt`, `Shots.kt` and `Sho
 ## Build
 
 ```bash
-JAVA_HOME=/path/to/jdk-21 ./gradlew :app:testDebugUnitTest :app:lintRelease :app:assembleRelease
+JAVA_HOME=/path/to/jdk-21 ./gradlew :app:testFullDebugUnitTest :app:lintFullRelease :app:assembleFullRelease
 ```
 
-Release signing reads `~/.clipshot/keystore.properties` if present; otherwise the release APK is unsigned. To check reproducibility, build the same commit twice from two clones with `-Punsigned` and compare the SHA-256 of `app-release-unsigned.apk`.
+Release signing reads `~/.clipshot/keystore.properties` if present; otherwise the release APK is unsigned. To check reproducibility, build the same commit twice from two clones with `-Punsigned` and compare the SHA-256 of `app-full-release-unsigned.apk`.
+
+Two flavors share all the code: `full` (GitHub, Obtainium, F-Droid) and `play` (Google Play, without the "remove from gallery" mode, since Play reserves All files access to file managers, backup and antivirus apps).
 
 `pastecheck/` is a tiny test app that reads the clipboard the way a messaging app would, to check pasting end to end on a device or emulator.
 

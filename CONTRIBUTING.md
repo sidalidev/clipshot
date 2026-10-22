@@ -12,7 +12,7 @@ Thanks for helping. Clipshot does one thing; contributions that keep it small, p
 ## Getting started
 
 1. JDK 21, Android SDK with platform 36.
-2. `./gradlew :app:testDebugUnitTest :app:lintRelease :app:assembleDebug`
+2. `./gradlew :app:testFullDebugUnitTest :app:lintFullRelease :app:assembleFullDebug`
 3. Test on a device or emulator: take a screenshot (`adb shell input keyevent 120`), then run `pastecheck` to check that the image pastes into another app.
 
 ## Pull requests

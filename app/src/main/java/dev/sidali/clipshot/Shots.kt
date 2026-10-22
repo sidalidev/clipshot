@@ -29,7 +29,7 @@ object Shots {
     fun hasAccess(ctx: Context): Boolean = ctx.checkSelfPermission(READ_PERMISSION) == PackageManager.PERMISSION_GRANTED
 
     /** "All files access", only needed for the optional "remove from gallery" mode. */
-    fun canDelete(): Boolean = Environment.isExternalStorageManager()
+    fun canDelete(): Boolean = BuildConfig.REMOVE_FROM_GALLERY && Environment.isExternalStorageManager()
 
     fun dir(ctx: Context) = File(ctx.noBackupFilesDir, "shots").apply { mkdirs() }
 

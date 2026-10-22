@@ -18,8 +18,8 @@ android {
         applicationId = "dev.sidali.clipshot"
         minSdk = 30
         targetSdk = 36
-        versionCode = 2
-        versionName = "1.1.0"
+        versionCode = 3
+        versionName = "1.1.1"
     }
     signingConfigs {
         if (signing.exists()) create("release") {
@@ -29,6 +29,16 @@ android {
             keyPassword = signingProps.getProperty("keyPassword")
         }
     }
+    // Two distributions from the same code:
+    //  - full: GitHub releases, Obtainium, F-Droid. Includes the optional "remove from gallery" mode.
+    //  - play: Google Play. Same app without that mode, because Play only allows "All files access"
+    //    for file managers, backup and antivirus apps.
+    flavorDimensions += "dist"
+    productFlavors {
+        create("full") { dimension = "dist"; buildConfigField("boolean", "REMOVE_FROM_GALLERY", "true") }
+        create("play") { dimension = "dist"; buildConfigField("boolean", "REMOVE_FROM_GALLERY", "false") }
+    }
+
     buildTypes {
         release {
             // Reproducible builds: no git commit id baked into the APK.
@@ -41,7 +51,7 @@ android {
         }
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
-    buildFeatures { compose = true }
+    buildFeatures { compose = true; buildConfig = true }
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
     dependenciesInfo { includeInApk = false; includeInBundle = false }
 }

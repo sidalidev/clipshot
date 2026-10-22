@@ -279,13 +279,14 @@ private fun LastCard(thumb: ImageBitmap?, lastTime: Long, count: Int) {
 
 @Composable
 private fun OptionsCard(removeOn: Boolean, canDelete: Boolean, onRemove: (Boolean) -> Unit, onAddTile: (() -> Unit)?) {
+    if (!BuildConfig.REMOVE_FROM_GALLERY && onAddTile == null) return
     Card {
         Text(
             stringResource(R.string.options).uppercase(), fontSize = 12.sp, letterSpacing = 0.6.sp,
             fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(14.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        if (BuildConfig.REMOVE_FROM_GALLERY) Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(stringResource(R.string.remove_title), fontSize = 17.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
                 Spacer(Modifier.height(2.dp))
@@ -302,9 +303,11 @@ private fun OptionsCard(removeOn: Boolean, canDelete: Boolean, onRemove: (Boolea
             )
         }
         if (onAddTile != null) {
+            if (BuildConfig.REMOVE_FROM_GALLERY) {
             Spacer(Modifier.height(16.dp))
             Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)))
             Spacer(Modifier.height(16.dp))
+            }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(R.string.tile_title), fontSize = 17.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
