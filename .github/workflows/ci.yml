@@ -1,6 +1,7 @@
 name: CI
 on:
   push:
+    branches: [main]
   pull_request:
 permissions:
   contents: read
@@ -11,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
-      - uses: android-actions/setup-android@v3
+      # The Ubuntu runner ships the Android SDK; Gradle fetches the platform it needs.
       - name: Unit tests, lint, release build (unsigned)
         run: ./gradlew --no-daemon :app:testDebugUnitTest :app:lintRelease :app:assembleRelease -Punsigned
       - name: No internet permission, ever
