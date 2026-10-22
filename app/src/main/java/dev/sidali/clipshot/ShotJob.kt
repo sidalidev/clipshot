@@ -17,8 +17,15 @@ class ShotJob : JobService() {
     override fun onStartJob(params: JobParameters): Boolean {
         Thread {
             try {
-                // The screenshot is first inserted as "pending", then published: retry briefly.
-                repeat(6) { if (Shots.copyLatest(this)) return@Thread; Thread.sleep(250) }
+                // The system inserts the screenshot as "pending", then publishes it. Keep looking while a
+                // screenshot is pending (up to 10 s), otherwise give up after a short grace period.
+                val start = System.currentTimeMillis()
+                while (true) {
+                    if (Shots.copyLatest(this)) break
+                    val waited = System.currentTimeMillis() - start
+                    if (waited > 10_000 || (waited > 1_000 && !Shots.screenshotPending(this))) break
+                    Thread.sleep(200)
+                }
             } finally {
                 jobFinished(params, false)
                 schedule(this)

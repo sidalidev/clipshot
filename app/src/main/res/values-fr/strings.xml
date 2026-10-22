@@ -14,7 +14,15 @@
     <string name="none_yet_body">Fais une capture pour essayer</string>
     <plurals name="count">
         <item quantity="one">%d capture copiée</item>
+        <item quantity="many">%d captures copiées</item>
         <item quantity="other">%d captures copiées</item>
     </plurals>
     <string name="privacy">Aucun accès à Internet. Aucun compte. Aucun pistage.\nRien ne quitte ton téléphone.</string>
+    <string name="options">Options</string>
+    <string name="remove_title">Retirer de la galerie</string>
+    <string name="remove_body">Une minute après la copie, la capture est supprimée de tes photos. Elle reste dans le presse-papiers.</string>
+    <string name="remove_needs">Demande « Accès à tous les fichiers ». Clipshot ne s\'en sert que pour ça.</string>
+    <string name="tile_title">Tuile des réglages rapides</string>
+    <string name="tile_body">Mets Clipshot en pause depuis le volet des notifications.</string>
+    <string name="tile_add">Ajouter</string>
 </resources>

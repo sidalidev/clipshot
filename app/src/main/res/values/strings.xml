@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Clipshot</string>
+    <string name="app_name" translatable="false">Clipshot</string>
     <string name="tagline">Press the two buttons. Your screenshot is already on the clipboard.</string>
     <string name="clip_label">Screenshot</string>
     <string name="access_title">One permission, that\'s all</string>
@@ -18,4 +18,11 @@
         <item quantity="other">%d screenshots copied</item>
     </plurals>
     <string name="privacy">No internet permission. No account. No tracking.\nNothing ever leaves your phone.</string>
+    <string name="options">Options</string>
+    <string name="remove_title">Remove from gallery</string>
+    <string name="remove_body">One minute after the copy, the screenshot is deleted from your photos. It stays on the clipboard.</string>
+    <string name="remove_needs">Needs \"All files access\". Clipshot uses it for this one thing.</string>
+    <string name="tile_title">Quick Settings tile</string>
+    <string name="tile_body">Pause Clipshot from the notification shade.</string>
+    <string name="tile_add">Add</string>
 </resources>

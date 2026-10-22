@@ -1,0 +1,14 @@
+Appuie sur les deux boutons. Ta capture est déjà dans le presse-papiers.
+
+Clipshot copie chaque nouvelle capture d'écran dans le presse-papiers dès qu'Android l'enregistre : il n'y a plus qu'à la coller dans une discussion, un mail ou une note.
+
+<b>Privé par construction</b>
+* Aucune permission Internet : l'app ne peut ouvrir aucune connexion.
+* Aucun compte, aucune statistique, aucune publicité.
+* Aucun service en arrière-plan ni notification permanente : Android ne réveille Clipshot que lorsqu'une nouvelle image est enregistrée.
+
+<b>Options</b>
+* Retirer de la galerie : une minute après la copie, la capture est supprimée de tes photos et ne vit plus que dans le presse-papiers (demande « Accès à tous les fichiers », utilisé pour ça seulement).
+* Tuile des réglages rapides pour mettre en pause.
+
+Fonctionne sur tout Android 11 ou plus, conçu et testé pour GrapheneOS.

@@ -18,8 +18,8 @@ android {
         applicationId = "dev.sidali.clipshot"
         minSdk = 30
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.1.0"
     }
     signingConfigs {
         if (signing.exists()) create("release") {
@@ -31,10 +31,13 @@ android {
     }
     buildTypes {
         release {
+            // Reproducible builds: no git commit id baked into the APK.
+            vcsInfo.include = false
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-            signingConfigs.findByName("release")?.let { signingConfig = it }
+            // -Punsigned builds an unsigned APK, used to check that a build is reproducible.
+            if (!project.hasProperty("unsigned")) signingConfigs.findByName("release")?.let { signingConfig = it }
         }
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
@@ -51,4 +54,5 @@ dependencies {
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.activity:activity-compose:1.11.0")
+    testImplementation("junit:junit:4.13.2")
 }

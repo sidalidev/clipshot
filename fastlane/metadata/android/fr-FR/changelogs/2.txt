@@ -1,0 +1,1 @@
+Option « Retirer de la galerie », tuile des réglages rapides, détection plus fiable pendant l'écriture de la capture.

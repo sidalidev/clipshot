@@ -10,22 +10,23 @@ import android.provider.OpenableColumns
 import java.io.File
 import java.io.FileNotFoundException
 
-/** Serves our private copies, read-only, to the app the user pastes into (granted by the clipboard). */
+/**
+ * Serves our private copies, read-only, to the app the user pastes into. Not exported: other apps
+ * only get access through the one-off grant the clipboard gives to the app that reads the clip.
+ */
 class ShotProvider : ContentProvider() {
     override fun onCreate() = true
 
     private fun file(uri: Uri): File {
         val ctx = context ?: throw FileNotFoundException()
-        val name = uri.lastPathSegment ?: throw FileNotFoundException()
-        val dir = Shots.dir(ctx).canonicalFile
-        val f = File(dir, name).canonicalFile
-        if (f.parentFile != dir || !f.exists()) throw FileNotFoundException(name)
+        val segs = uri.pathSegments
+        val name = segs.singleOrNull()?.takeIf { Rules.isSafeName(it) } ?: throw FileNotFoundException()
+        val f = File(Shots.dir(ctx), name)
+        if (!f.isFile) throw FileNotFoundException(name)
         return f
     }
 
-    override fun getType(uri: Uri): String = when (uri.lastPathSegment?.substringAfterLast('.')) {
-        "jpg" -> "image/jpeg"; "webp" -> "image/webp"; else -> "image/png"
-    }
+    override fun getType(uri: Uri): String? = uri.lastPathSegment?.takeIf { Rules.isSafeName(it) }?.let { Rules.mimeFor(it) }
 
     override fun openFile(uri: Uri, mode: String): ParcelFileDescriptor {
         if (mode != "r") throw SecurityException("read-only")
@@ -34,13 +35,14 @@ class ShotProvider : ContentProvider() {
 
     override fun query(uri: Uri, projection: Array<out String>?, s: String?, a: Array<out String>?, o: String?): Cursor {
         val f = file(uri)
-        val cols = projection ?: arrayOf(OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE)
+        val cols = (projection ?: arrayOf(OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE))
+            .filter { it == OpenableColumns.DISPLAY_NAME || it == OpenableColumns.SIZE }.toTypedArray()
         return MatrixCursor(cols, 1).apply {
-            addRow(cols.map { if (it == OpenableColumns.SIZE) f.length() else if (it == OpenableColumns.DISPLAY_NAME) f.name else null })
+            addRow(cols.map { if (it == OpenableColumns.SIZE) f.length() else f.name })
         }
     }
 
-    override fun insert(uri: Uri, values: ContentValues?): Uri? = null
-    override fun update(uri: Uri, values: ContentValues?, s: String?, a: Array<out String>?) = 0
-    override fun delete(uri: Uri, s: String?, a: Array<out String>?) = 0
+    override fun insert(uri: Uri, values: ContentValues?): Uri? = throw UnsupportedOperationException()
+    override fun update(uri: Uri, values: ContentValues?, s: String?, a: Array<out String>?): Int = throw UnsupportedOperationException()
+    override fun delete(uri: Uri, s: String?, a: Array<out String>?): Int = throw UnsupportedOperationException()
 }

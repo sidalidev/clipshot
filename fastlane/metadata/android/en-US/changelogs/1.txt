@@ -1,0 +1,1 @@
+First release: every screenshot goes straight to the clipboard.

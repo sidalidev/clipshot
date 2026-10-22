@@ -6,6 +6,10 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.app.StatusBarManager
+import android.content.ComponentName
+import android.graphics.drawable.Icon
+import android.os.Build
 import android.text.format.DateUtils
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -97,9 +101,12 @@ private fun Screen() {
     var count by remember { mutableIntStateOf(Prefs.count(ctx)) }
     var thumb by remember { mutableStateOf<ImageBitmap?>(null) }
     var askedOnce by remember { mutableStateOf(false) }
+    var removeOn by remember { mutableStateOf(Prefs.removeFromGallery(ctx)) }
+    var canDelete by remember { mutableStateOf(Shots.canDelete()) }
 
     fun refresh() {
         access = Shots.hasAccess(ctx); enabled = Prefs.enabled(ctx)
+        removeOn = Prefs.removeFromGallery(ctx); canDelete = Shots.canDelete()
         val t = Prefs.lastTime(ctx)
         if (t != lastTime || (thumb == null && t > 0)) {
             thumb = Shots.lastFile(ctx)?.let { f ->
@@ -146,13 +153,28 @@ private fun Screen() {
                 transitionSpec = { fadeIn(tween(300)) togetherWith fadeOut(tween(200)) },
             ) { ok ->
                 if (!ok) AccessCard(askedOnce,
-                    onAsk = { ask.launch(Manifest.permission.READ_MEDIA_IMAGES) },
+                    onAsk = { ask.launch(Shots.READ_PERMISSION) },
                     onSettings = {
                         ctx.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", ctx.packageName, null)))
                     })
                 else Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                     StatusCard(enabled) { v -> Prefs.setEnabled(ctx, v); enabled = v; ShotJob.schedule(ctx) }
                     LastCard(thumb, lastTime, count)
+                    OptionsCard(
+                        removeOn = removeOn, canDelete = canDelete,
+                        onRemove = { v ->
+                            Prefs.setRemoveFromGallery(ctx, v); removeOn = v
+                            if (v && !Shots.canDelete()) ctx.startActivity(
+                                Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.fromParts("package", ctx.packageName, null)),
+                            )
+                        },
+                        onAddTile = if (Build.VERSION.SDK_INT >= 33) ({
+                            ctx.getSystemService(StatusBarManager::class.java).requestAddTileService(
+                                ComponentName(ctx, PauseTile::class.java), ctx.getString(R.string.app_name),
+                                Icon.createWithResource(ctx, R.drawable.ic_tile), ctx.mainExecutor,
+                            ) { }
+                        }) else null,
+                    )
                 }
             }
             Spacer(Modifier.height(28.dp))
@@ -250,6 +272,50 @@ private fun LastCard(thumb: ImageBitmap?, lastTime: Long, count: Int) {
                         fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun OptionsCard(removeOn: Boolean, canDelete: Boolean, onRemove: (Boolean) -> Unit, onAddTile: (() -> Unit)?) {
+    Card {
+        Text(
+            stringResource(R.string.options).uppercase(), fontSize = 12.sp, letterSpacing = 0.6.sp,
+            fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(Modifier.height(14.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(stringResource(R.string.remove_title), fontSize = 17.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                Spacer(Modifier.height(2.dp))
+                Text(stringResource(R.string.remove_body), fontSize = 14.sp, lineHeight = 19.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                if (removeOn && !canDelete) {
+                    Spacer(Modifier.height(6.dp))
+                    Text(stringResource(R.string.remove_needs), fontSize = 13.sp, lineHeight = 18.sp, color = Color(0xFFFF9F0A))
+                }
+            }
+            Spacer(Modifier.width(12.dp))
+            Switch(
+                checked = removeOn, onCheckedChange = onRemove,
+                colors = SwitchDefaults.colors(checkedTrackColor = Palette.green, checkedThumbColor = Color.White, checkedBorderColor = Color.Transparent),
+            )
+        }
+        if (onAddTile != null) {
+            Spacer(Modifier.height(16.dp))
+            Box(Modifier.fillMaxWidth().height(1.dp).background(MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)))
+            Spacer(Modifier.height(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.tile_title), fontSize = 17.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+                    Spacer(Modifier.height(2.dp))
+                    Text(stringResource(R.string.tile_body), fontSize = 14.sp, lineHeight = 19.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                Spacer(Modifier.width(12.dp))
+                Box(
+                    Modifier.clip(RoundedCornerShape(50)).background(MaterialTheme.colorScheme.surfaceVariant)
+                        .clickable(onClick = onAddTile).padding(horizontal = 16.dp, vertical = 8.dp),
+                ) { Text(stringResource(R.string.tile_add), color = Palette.accent, fontSize = 15.sp, fontWeight = FontWeight.SemiBold) }
             }
         }
     }

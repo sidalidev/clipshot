@@ -1,0 +1,1 @@
+Remove from gallery option, Quick Settings tile, more reliable detection while the screenshot is still being written.
