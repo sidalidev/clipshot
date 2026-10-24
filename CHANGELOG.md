@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.0
+
+- Capture: a Quick Settings tile and the floating accessibility button take a screenshot in one tap, straight to the clipboard. It works through an accessibility service that cannot read your screen; it only presses the screenshot button. Optional, off by default, not in the Google Play version.
+- Your phone's colors: Material You, from your wallpaper, with a matching palette on phones without it. Themed icon.
+- No more white flash at launch, predictive back, springy buttons and haptic feedback.
+- English only.
+
 ## 1.1.1
 
 - Google Play build (same app, without the "remove from gallery" mode, which Play does not allow). Nothing changes for GitHub, Obtainium and F-Droid users.

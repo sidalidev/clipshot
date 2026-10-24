@@ -17,10 +17,10 @@ Upload `clipshot-key.zip`. The upload key is the same key; nothing else to do.
 
 ## 3. Store listing (Grow > Store presence > Main store listing)
 - Short description (80 max): `Every screenshot straight to the clipboard. No internet permission.`
-- Full description: `fastlane/metadata/android/en-US/full_description.txt` (French translation: `fr-FR/`). Play does not render `<b>`: remove the tags.
+- Full description: `fastlane/metadata/android/en-US/full_description.txt`. Play does not render `<b>`: remove the tags, and remove the Capture lines and the "About the Capture service" section (Capture is not in the play flavor).
 - App icon 512×512: `fastlane/metadata/android/en-US/images/icon.png`
 - Feature graphic 1024×500: `fastlane/metadata/android/en-US/images/featureGraphic.png`
-- Phone screenshots: `fastlane/metadata/android/en-US/images/phoneScreenshots/1.png` to `3.png`
+- Phone screenshots: `fastlane/metadata/android/en-US/images/phoneScreenshots/1.png` to `3.png` (not `4.png`: it shows Capture, which the play flavor does not have). They show the full flavor's Capture row in the options card; retake them from the play build if Play asks.
 - Category: **Tools**. Contact email: `contact@sidali.dev`. Website: `https://github.com/sidalidev/clipshot`
 
 ## 4. App content (Policy > App content)
@@ -37,5 +37,5 @@ Upload `clipshot-key.zip`. The upload key is the same key; nothing else to do.
 
 ## 5. Release
 - If your developer account is a **personal account created after 13 November 2023**, Play requires a closed test with at least 12 testers for 14 days before production. Otherwise go straight to Production.
-- Upload `app-play-release.aab`, release name `1.1.1`, release notes: `fastlane/metadata/android/en-US/changelogs/3.txt`.
+- Upload `app-play-release.aab`, release name `1.2.0`. Release notes: the colors and polish lines of `fastlane/metadata/android/en-US/changelogs/4.txt`, without the Capture line.
 - Countries: all.

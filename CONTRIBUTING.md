@@ -19,7 +19,9 @@ Thanks for helping. Clipshot does one thing; contributions that keep it small, p
 
 - One topic per pull request, with a short description of what changes for the user.
 - Add or update unit tests in `app/src/test` for any change to `Rules.kt`.
-- Strings go in `values/strings.xml` (English) and `values-fr/strings.xml`. New languages are welcome.
+- Clipshot is English only. Strings go in `values/strings.xml`; lint fails on hard-coded text.
+- Colors come from the phone (Material You). Never write a color in a screen: add a role in `Tokens.kt`. CI fails on a color literal anywhere else.
+- The Capture accessibility service must stay unable to read the screen. Do not add event types, window content access, gestures or key filtering.
 - Update `CHANGELOG.md` under "Unreleased".
 
 ## Reporting bugs

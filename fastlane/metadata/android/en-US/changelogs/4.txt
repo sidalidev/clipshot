@@ -1,0 +1,3 @@
+* Capture: a Quick Settings tile and the floating accessibility button take a screenshot in one tap, straight to the clipboard. The accessibility service it uses cannot read your screen; it only presses the screenshot button. Optional, off by default.
+* Your phone's colors (Material You), themed icon, no flash at launch, predictive back, haptic feedback.
+* English only.

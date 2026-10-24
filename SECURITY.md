@@ -8,7 +8,7 @@ Include what an attacker can do, the steps to reproduce, and the version or comm
 
 ## Scope
 
-In scope: anything that lets another app or a remote party read Clipshot's copies or settings, make it copy or delete an image it should not, or make it use the network.
+In scope: anything that lets another app or a remote party read Clipshot's copies or settings, make it copy or delete an image it should not, make it use the network, or make the Capture accessibility service do anything beyond closing the Quick Settings panel and taking a screenshot.
 
 Out of scope: the clipboard itself. Android lets the focused app and the keyboard read the clipboard; that is inherent to copying anything.
 
@@ -17,6 +17,7 @@ Out of scope: the clipboard itself. Android lets the focused app and the keyboar
 - No INTERNET permission. CI checks the merged manifest.
 - `ShotProvider` is not exported. It serves only names matching `shot-<digits>.<png|jpg|webp>` from the app's no-backup directory, read-only.
 - Gallery removal (optional, needs All files access) deletes only rows owned by a system screenshot app, and re-checks the row just before deleting.
+- The Capture accessibility service (full flavor only) subscribes to no event, has `canRetrieveWindowContent="false"`, no gestures and no key filtering. `CaptureConfigTest` fails if that declaration changes. The play flavor removes it from the manifest; CI checks the merged manifest.
 - Backups and device-to-device transfers of app data are disabled.
 
 ## Release signing

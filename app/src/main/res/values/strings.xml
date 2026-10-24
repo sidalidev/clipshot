@@ -22,7 +22,26 @@
     <string name="remove_title">Remove from gallery</string>
     <string name="remove_body">One minute after the copy, the screenshot is deleted from your photos. It stays on the clipboard.</string>
     <string name="remove_needs">Needs \"All files access\". Clipshot uses it for this one thing.</string>
-    <string name="tile_title">Quick Settings tile</string>
-    <string name="tile_body">Pause Clipshot from the notification shade.</string>
+    <string name="tile_title">Pause tile</string>
+    <string name="tile_body">Pause Clipshot from Quick Settings.</string>
     <string name="tile_add">Add</string>
+    <string name="close">Close</string>
+
+    <!-- Capture (full flavor only) -->
+    <string name="capture_title">Capture</string>
+    <string name="capture_body">Take a screenshot from Quick Settings or the accessibility button.</string>
+    <string name="capture_setup">Set up</string>
+    <string name="capture_tile">Capture</string>
+    <string name="capture_tile_setup">Tap to set up</string>
+    <string name="capture_why">Android only lets apps take a screenshot through an accessibility service. Clipshot\'s service can\'t read your screen; it only presses the screenshot button.</string>
+    <string name="capture_steps">In the accessibility settings, open Clipshot and turn it on.</string>
+    <string name="capture_open">Open accessibility settings</string>
+    <string name="capture_restricted">If Android says the setting is restricted: App info, menu ⋮, Allow restricted settings.</string>
+    <string name="app_info">App info</string>
+    <string name="capture_ready">Ready</string>
+    <string name="capture_ready_body">Tap the Capture tile in Quick Settings, or the accessibility button. The screenshot goes to the clipboard.</string>
+    <string name="capture_add_tile">Add the Capture tile</string>
+    <string name="capture_settings">Accessibility settings</string>
+    <string name="a11y_summary">Screenshot from a tile or the accessibility button</string>
+    <string name="a11y_description">Takes a screenshot when you tap the Capture tile or the accessibility button, so Clipshot can copy it to the clipboard. This service receives no events and can\'t read what is on your screen. Its only action is pressing the screenshot button. Clipshot has no internet access.</string>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Clipshot's accessibility service, as narrow as Android allows.
+  - No accessibilityEventTypes: it receives no event at all (nothing about what is on screen or typed).
+  - canRetrieveWindowContent="false": it cannot read the content of any window.
+  - The only flag is flagRequestAccessibilityButton, for the floating accessibility button.
+  - No gestures, no key filtering, no fingerprint gestures, no magnification.
+  Its one action is performGlobalAction(GLOBAL_ACTION_TAKE_SCREENSHOT), see Capture.kt.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/a11y_description"
+    android:summary="@string/a11y_summary"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagRequestAccessibilityButton"
+    android:canRetrieveWindowContent="false"
+    android:canPerformGestures="false"
+    android:canRequestFilterKeyEvents="false"
+    android:canRequestFingerprintGestures="false"
+    android:notificationTimeout="0" />

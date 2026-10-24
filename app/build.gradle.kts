@@ -18,8 +18,8 @@ android {
         applicationId = "dev.sidali.clipshot"
         minSdk = 30
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.1"
+        versionCode = 4
+        versionName = "1.2.0"
     }
     signingConfigs {
         if (signing.exists()) create("release") {
@@ -30,13 +30,22 @@ android {
         }
     }
     // Two distributions from the same code:
-    //  - full: GitHub releases, Obtainium, F-Droid. Includes the optional "remove from gallery" mode.
-    //  - play: Google Play. Same app without that mode, because Play only allows "All files access"
-    //    for file managers, backup and antivirus apps.
+    //  - full: GitHub releases, Obtainium, F-Droid. Includes the optional "remove from gallery" mode
+    //    and Capture (Quick Settings tile and accessibility button, through an accessibility service).
+    //  - play: Google Play. Same app without those two, because Play only allows "All files access"
+    //    for file managers, backup and antivirus apps, and strictly limits accessibility services.
     flavorDimensions += "dist"
     productFlavors {
-        create("full") { dimension = "dist"; buildConfigField("boolean", "REMOVE_FROM_GALLERY", "true") }
-        create("play") { dimension = "dist"; buildConfigField("boolean", "REMOVE_FROM_GALLERY", "false") }
+        create("full") {
+            dimension = "dist"
+            buildConfigField("boolean", "REMOVE_FROM_GALLERY", "true")
+            buildConfigField("boolean", "CAPTURE", "true")
+        }
+        create("play") {
+            dimension = "dist"
+            buildConfigField("boolean", "REMOVE_FROM_GALLERY", "false")
+            buildConfigField("boolean", "CAPTURE", "false")
+        }
     }
 
     buildTypes {
