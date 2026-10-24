@@ -14,9 +14,9 @@ Repo: https://github.com/sidalidev/clipshot.git
 Binaries: https://github.com/sidalidev/clipshot/releases/download/v%v/clipshot-%v.apk
 
 Builds:
-  - versionName: 1.2.0
-    versionCode: 4
-    commit: 7e77aa6839950143c65e340ef028b5f9d14ba9af
+  - versionName: 1.3.0
+    versionCode: 5
+    commit: 4d8ba5181bab941c1eda5295f95d700f878578d9
     subdir: app
     sudo:
       - apt-get update
@@ -29,5 +29,5 @@ AllowedAPKSigningKeys: b2d10abfec2170c29d4c6f957bbb353608f9cf5591d8b3cd01b4694cc
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^v[0-9.]+$
-CurrentVersion: 1.2.0
-CurrentVersionCode: 4
+CurrentVersion: 1.3.0
+CurrentVersionCode: 5
