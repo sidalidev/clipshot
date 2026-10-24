@@ -11,6 +11,11 @@ plugins {
 val signing = File(System.getProperty("user.home"), ".clipshot/keystore.properties")
 val signingProps = Properties().apply { if (signing.exists()) signing.inputStream().use { load(it) } }
 
+// Date of the latest internal security review, the newest docs/security/YYYY-MM-DD.md. Shown in About.
+val securityReview: String = rootProject.file("docs/security").listFiles().orEmpty()
+    .map { it.name }.filter { Regex("""\d{4}-\d{2}-\d{2}\.md""").matches(it) }
+    .maxOrNull()?.removeSuffix(".md") ?: error("No review in docs/security/")
+
 android {
     namespace = "dev.sidali.clipshot"
     compileSdk = 36
@@ -18,8 +23,9 @@ android {
         applicationId = "dev.sidali.clipshot"
         minSdk = 30
         targetSdk = 36
-        versionCode = 4
-        versionName = "1.2.0"
+        versionCode = 5
+        versionName = "1.3.0"
+        buildConfigField("String", "SECURITY_REVIEW", "\"$securityReview\"")
     }
     signingConfigs {
         if (signing.exists()) create("release") {

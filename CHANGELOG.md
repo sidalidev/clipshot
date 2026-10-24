@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0
+
+- About: our principles, the installed version and what's new, the date of the last security review, the signing certificate of the installed app (compare it with SECURITY.md), and links to the source code, the privacy policy and private security reporting.
+- What leaves your device: nothing. The screen says so, and says what the optional Capture service cannot do.
+- Erase everything: resets Clipshot to its first launch (settings, counters, the last three copies, gallery removal turned off). Type ERASE to confirm.
+- Security: threat model and a dated internal review in `docs/`. CI now checks the permissions against a fixed list.
+
 ## 1.2.0
 
 - Capture: a Quick Settings tile and the floating accessibility button take a screenshot in one tap, straight to the clipboard. It works through an accessibility service that cannot read your screen; it only presses the screenshot button. Optional, off by default, not in the Google Play version.

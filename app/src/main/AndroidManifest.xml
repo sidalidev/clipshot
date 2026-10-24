@@ -32,6 +32,11 @@
             </intent-filter>
         </activity>
 
+        <!-- About and "What leaves your device". Its links open in the browser, on a tap. -->
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+
         <service
             android:name=".ShotJob"
             android:exported="false"

@@ -87,10 +87,17 @@ object Tokens {
     val dot = 10.dp
     val check = 28.dp
     val hairline = 1.dp
+    /** Smallest height of anything tappable. */
+    val touchTarget = 48.dp
     /** Thumbnail of the last screenshot: a phone screen in miniature. */
     val thumbWidth = 54.dp
     val thumbHeight = 96.dp
     val thumbRadius = 10.dp
+
+    /** Tinted (secondary) buttons: the role color at 12 %. */
+    const val tintAlpha = 0.12f
+    /** A disabled action. */
+    const val disabledAlpha = 0.38f
 
     const val pressedScale = 0.97f
     const val pressedAlpha = 0.85f
@@ -127,6 +134,9 @@ class Roles(
     val onSuccess: Color,
     /** Something still needs doing. */
     val warning: Color,
+    /** Destructive actions (Erase everything): the phone's error red. */
+    val danger: Color,
+    val onDanger: Color,
     /** Hero phone: a strong gradient from the palette, light content on it. */
     val heroTop: Color,
     val heroBottom: Color,
@@ -217,6 +227,7 @@ private fun roles(c: ColorScheme, dark: Boolean) = Roles(
     success = harmonize(if (dark) Fallback.successDark else Fallback.successLight, c.primary),
     onSuccess = if (dark) Fallback.onSuccessDark else Fallback.onSuccessLight,
     warning = harmonize(if (dark) Fallback.warningDark else Fallback.warningLight, c.primary),
+    danger = c.error, onDanger = c.onError,
     // Mid tones in both themes, so light content reads on them.
     heroTop = if (dark) c.tertiaryContainer else c.tertiary,
     heroBottom = if (dark) c.inversePrimary else c.primary,
@@ -306,6 +317,23 @@ fun PrimaryButton(text: String, modifier: Modifier = Modifier, onClick: () -> Un
             .clip(RoundedCornerShape(Tokens.buttonRadius)).background(Tokens.colors.accent),
         contentAlignment = Alignment.Center,
     ) { Text(text, color = Tokens.colors.onAccent, style = MaterialTheme.typography.labelLarge) }
+}
+
+/**
+ * Destructive action in the semantic red: tinted at 12 % ([filled] false) or filled, for the final
+ * confirmation. Dimmed and inert while not [enabled].
+ */
+@Composable
+fun DangerButton(text: String, filled: Boolean, modifier: Modifier = Modifier, enabled: Boolean = true, onClick: () -> Unit) {
+    val c = Tokens.colors
+    Box(
+        modifier.fillMaxWidth().height(Tokens.buttonHeight)
+            .then(if (enabled) Modifier.pressable(haptic = if (filled) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.CLOCK_TICK, onClick = onClick) else Modifier)
+            .graphicsLayer { alpha = if (enabled) 1f else Tokens.disabledAlpha }
+            .clip(RoundedCornerShape(Tokens.buttonRadius))
+            .background(if (filled) c.danger else c.danger.copy(alpha = Tokens.tintAlpha)),
+        contentAlignment = Alignment.Center,
+    ) { Text(text, color = if (filled) c.onDanger else c.danger, style = MaterialTheme.typography.labelLarge) }
 }
 
 /** Small capsule, for an action inside a row. */

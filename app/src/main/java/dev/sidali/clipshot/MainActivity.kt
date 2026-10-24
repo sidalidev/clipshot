@@ -181,7 +181,9 @@ private fun Screen() {
             stringResource(R.string.privacy), style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center,
             color = Tokens.colors.secondaryText, modifier = Modifier.widthIn(max = Tokens.textWidth),
         )
-        Spacer(Modifier.height(Tokens.space24))
+        Spacer(Modifier.height(Tokens.space8))
+        TextLink(stringResource(R.string.about)) { AboutActivity.open(ctx) }
+        Spacer(Modifier.height(Tokens.space16))
     }
 }
 

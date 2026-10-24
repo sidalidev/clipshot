@@ -26,6 +26,51 @@
     <string name="tile_body">Pause Clipshot from Quick Settings.</string>
     <string name="tile_add">Add</string>
     <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="cancel">Cancel</string>
+    <string name="about">About</string>
+
+    <!-- About (the same screen in every app by Sid) -->
+    <string name="about_title">About</string>
+    <string name="about_principles">Our principles</string>
+    <string name="principle_1">Your data belongs to you.</string>
+    <string name="principle_2">No account. No tracking. No ads.</string>
+    <string name="principle_3">Nothing leaves your device unless you choose it.</string>
+    <string name="principle_4">The code is open, so anyone can check this.</string>
+    <string name="about_version">Version</string>
+    <string name="version_line">Version %1$s</string>
+    <string name="whats_new">What\'s new</string>
+    <string name="about_security">Security</string>
+    <string name="security_review">Last security review: %1$s</string>
+    <string name="security_audit">Internal review. No external audit yet.</string>
+    <string name="signing_certificate">Signing certificate</string>
+    <string name="unknown">Unknown</string>
+    <string name="report_issue">Report a security issue</string>
+    <string name="about_links">Links</string>
+    <string name="source_code">Source code</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="contact">Contact</string>
+    <string name="made_by">Made by Sid · sidali.dev</string>
+    <string name="no_app_for_link">No app on this phone can open this link.</string>
+
+    <string name="erase_title">Erase everything</string>
+    <string name="erase_hint">Resets Clipshot to how it was on first launch.</string>
+    <string name="erase_body">Your settings, counters and the last three copies are deleted, and \"Remove from gallery\" is turned off. Your screenshots in the gallery are not touched.</string>
+    <string name="erase_type">Type %1$s to confirm.</string>
+    <string name="erase_word" translatable="false">ERASE</string>
+    <string name="erase_confirm">Erase</string>
+    <string name="erased">Everything was erased.</string>
+
+    <!-- What leaves your device (same facts as PRIVACY.md) -->
+    <string name="leaves_title">What leaves your device</string>
+    <string name="leaves_nothing">Nothing. This app has no internet access.</string>
+    <string name="leaves_clipboard_title">Clipboard</string>
+    <string name="leaves_clipboard">When you paste, the app you paste into gets that screenshot. Nothing else is shared.</string>
+    <string name="leaves_capture">The optional accessibility service cannot read your screen. It receives no events and only presses the screenshot button.</string>
+    <string name="leaves_backups_title">Backups</string>
+    <string name="leaves_backups">Clipshot\'s data is excluded from cloud backups and phone-to-phone transfers.</string>
+    <string name="leaves_links_title">Links</string>
+    <string name="leaves_links">Links in About open in your browser or mail app, only when you tap them. Clipshot itself never connects to anything.</string>
 
     <!-- Capture (full flavor only) -->
     <string name="capture_title">Capture</string>

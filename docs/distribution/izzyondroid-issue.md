@@ -1,6 +1,6 @@
 # IzzyOnDroid: App Inclusion Request (to paste at https://codeberg.org/IzzyOnDroid/repodata/issues/new, template "App Inclusion Request")
 
-Title: Clipshot – every screenshot straight to the clipboard (dev.sidali.clipshot)
+Title: Clipshot: every screenshot straight to the clipboard (dev.sidali.clipshot)
 
 Guidelines: tick all four (I am the developer; complies with the policy; not already listed; Fastlane folder available).
 

@@ -18,6 +18,7 @@ Android takes the screenshot as usual, Clipshot only hands it to the clipboard. 
 | No screen reading | The optional Capture service cannot read anything on screen. It only presses the screenshot button. |
 | Nothing leaves the phone | No account, no analytics, no ads, no cloud backup, no device-to-device transfer of its data. |
 | Reproducible builds | Two builds of the same commit produce byte-identical APKs. |
+| Checkable | About shows the signing certificate of the installed app, to compare with [SECURITY.md](SECURITY.md). Last security review: 24 Oct 2026, internal, no external audit yet ([docs/security](docs/security/), [threat model](docs/THREAT_MODEL.md)). |
 
 ## Features
 
@@ -25,6 +26,7 @@ Android takes the screenshot as usual, Clipshot only hands it to the clipboard. 
 - **Remove from gallery** (optional): one minute after the copy, the screenshot is deleted from your photos and only lives on the clipboard. It needs "All files access", requested only when you turn this on, and used for nothing else. Only files saved by the system screenshot app are ever deleted, and only if they are untouched.
 - **Capture** (optional): a Quick Settings tile and the floating accessibility button take a screenshot in one tap, and it goes to the clipboard like any other. See [The Capture service](#the-capture-service).
 - **Pause tile** in Quick Settings to pause and resume.
+- **About**: our principles, what leaves your device (nothing), the signing certificate, and **Erase everything**, which resets Clipshot to its first launch.
 - Your phone's colors (Material You), light and dark, themed icon. English.
 
 ## Install

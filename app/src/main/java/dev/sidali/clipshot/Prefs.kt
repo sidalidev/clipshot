@@ -34,4 +34,7 @@ object Prefs {
         save(ctx, pendingDeletes(ctx) + (id to (due to addedAt)))
 
     @Synchronized fun removePendingDelete(ctx: Context, id: Long) = save(ctx, pendingDeletes(ctx) - id)
+
+    /** Back to the defaults of the first launch: on, gallery removal off, no history, nothing pending. */
+    @Synchronized fun clear(ctx: Context) { p(ctx).edit().clear().commit() }
 }

@@ -1,0 +1,5 @@
+android.permission.READ_MEDIA_IMAGES
+android.permission.READ_EXTERNAL_STORAGE
+android.permission.RECEIVE_BOOT_COMPLETED
+android.permission.MANAGE_EXTERNAL_STORAGE
+dev.sidali.clipshot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
