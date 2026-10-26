@@ -21,7 +21,7 @@
     <string name="options">Options</string>
     <string name="remove_title">Remove from gallery</string>
     <string name="remove_body">One minute after the copy, the screenshot is deleted from your photos. It stays on the clipboard.</string>
-    <string name="remove_needs">Needs \"All files access\". Clipshot uses it for this one thing.</string>
+    <string name="remove_needs">Waiting for \"All files access\", which is off. Turn it on in Permissions; Clipshot uses it for this one thing.</string>
     <string name="tile_title">Pause tile</string>
     <string name="tile_body">Pause Clipshot from Quick Settings.</string>
     <string name="tile_add">Add</string>
@@ -71,6 +71,26 @@
     <string name="leaves_backups">Clipshot\'s data is excluded from cloud backups and phone-to-phone transfers.</string>
     <string name="leaves_links_title">Links</string>
     <string name="leaves_links">Links in About open in your browser or mail app, only when you tap them. Clipshot itself never connects to anything.</string>
+
+    <!-- Permissions: what each access is for, and the same one tap to turn it on or off -->
+    <string name="perms_title">Permissions</string>
+    <string name="perms_intro">Each one is for one feature. Turn any of them off whenever you like: Clipshot adapts the next time you open it.</string>
+    <string name="perm_allowed">Allowed</string>
+    <string name="perm_not_allowed">Not allowed</string>
+    <string name="perm_allow">Allow</string>
+    <string name="perm_turn_on">Turn on in Settings</string>
+    <string name="perm_turn_off">Turn off in Settings</string>
+    <string name="perm_photos">Photos</string>
+    <string name="perm_photos_why">To see each new screenshot and copy it to the clipboard. This is what Clipshot does.</string>
+    <string name="perm_photos_off">Screenshots are not copied for now. Allow it again to pick up where you left off.</string>
+    <string name="perm_files">All files access</string>
+    <string name="perm_files_why">Only for \"Remove from gallery\": it deletes the screenshot from your photos one minute after the copy.</string>
+    <string name="perm_files_off">\"Remove from gallery\" is on but can\'t delete anything until this is on. Your screenshots stay in your photos.</string>
+    <string name="perm_files_unused">Not needed while \"Remove from gallery\" is off.</string>
+    <string name="perm_capture">Accessibility (Capture)</string>
+    <string name="perm_capture_why">Only for Capture: the tile and the accessibility button press the screenshot button. It can\'t read your screen.</string>
+    <string name="perm_capture_off">Capture is off. The two buttons still work, and still copy.</string>
+    <string name="perms_boot">Clipshot also starts again after your phone restarts, so it keeps working. Android allows this at install and has no switch for it.</string>
 
     <!-- Capture (full flavor only) -->
     <string name="capture_title">Capture</string>

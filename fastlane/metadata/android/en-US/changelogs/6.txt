@@ -1,0 +1,2 @@
+* Permissions: every access Clipshot uses, why, and which feature needs it. One tap turns it on; when it is on, the same tap opens the settings page to turn it off.
+* Open it from the main screen or from About.

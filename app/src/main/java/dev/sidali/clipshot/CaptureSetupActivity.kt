@@ -118,7 +118,7 @@ private fun CaptureSetup(onClose: () -> Unit) {
 }
 
 /** The accessibility settings, with Clipshot highlighted in the list where Settings supports it. */
-private fun openAccessibility(ctx: Context) {
+fun openAccessibility(ctx: Context) {
     val me = ComponentName(ctx, CaptureService::class.java).flattenToString()
     ctx.startActivity(
         Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)

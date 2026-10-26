@@ -8,6 +8,9 @@ object Prefs {
     fun setEnabled(ctx: Context, v: Boolean) { p(ctx).edit().putBoolean("enabled", v).apply() }
     fun removeFromGallery(ctx: Context) = p(ctx).getBoolean("removeFromGallery", false)
     fun setRemoveFromGallery(ctx: Context, v: Boolean) { p(ctx).edit().putBoolean("removeFromGallery", v).apply() }
+    /** True once the photos permission dialog was shown, to know when Android stops showing it. */
+    fun photosAsked(ctx: Context) = p(ctx).getBoolean("photosAsked", false)
+    fun setPhotosAsked(ctx: Context) { p(ctx).edit().putBoolean("photosAsked", true).apply() }
     fun lastId(ctx: Context) = p(ctx).getLong("lastId", -1)
     fun lastName(ctx: Context): String? = p(ctx).getString("lastName", null)
     fun lastTime(ctx: Context) = p(ctx).getLong("lastTime", 0)

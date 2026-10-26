@@ -126,7 +126,7 @@ private fun Screen() {
     LaunchedEffect(Unit) { while (true) { refresh(); delay(1000) } }
 
     val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
-        askedOnce = true; refresh(); ShotJob.schedule(ctx)
+        askedOnce = true; Prefs.setPhotosAsked(ctx); refresh(); ShotJob.schedule(ctx)
     }
 
     Column(
@@ -182,7 +182,10 @@ private fun Screen() {
             color = Tokens.colors.secondaryText, modifier = Modifier.widthIn(max = Tokens.textWidth),
         )
         Spacer(Modifier.height(Tokens.space8))
-        TextLink(stringResource(R.string.about)) { AboutActivity.open(ctx) }
+        Row(horizontalArrangement = Arrangement.spacedBy(Tokens.space24)) {
+            TextLink(stringResource(R.string.perms_title)) { AboutActivity.open(ctx, AboutActivity.PAGE_PERMISSIONS) }
+            TextLink(stringResource(R.string.about)) { AboutActivity.open(ctx) }
+        }
         Spacer(Modifier.height(Tokens.space16))
     }
 }

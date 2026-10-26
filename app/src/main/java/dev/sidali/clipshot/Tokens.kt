@@ -51,6 +51,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -275,6 +276,7 @@ fun ClipshotTheme(content: @Composable () -> Unit) {
 fun Modifier.pressable(
     role: Role = Role.Button,
     haptic: Int = HapticFeedbackConstants.CLOCK_TICK,
+    onClickLabel: String? = null,
     onClick: () -> Unit,
 ): Modifier = composed {
     val src = remember { MutableInteractionSource() }
@@ -287,7 +289,7 @@ fun Modifier.pressable(
     )
     this
         .graphicsLayer { scaleX = s; scaleY = s; alpha = if (pressed) Tokens.pressedAlpha else 1f }
-        .clickable(interactionSource = src, indication = null, role = role) {
+        .clickable(interactionSource = src, indication = null, role = role, onClickLabel = onClickLabel) {
             view.performHapticFeedback(haptic)
             onClick()
         }
@@ -397,5 +399,15 @@ fun Check() {
         val u = size.minDimension / 28f
         drawLine(ink, Offset(8 * u, 14.5f * u), Offset(12.5f * u, 19 * u), 3f * u, StrokeCap.Round)
         drawLine(ink, Offset(12.5f * u, 19 * u), Offset(20 * u, 9.5f * u), 3f * u, StrokeCap.Round)
+    }
+}
+
+/** Empty ring, same size as [Check]: something that is off. */
+@Composable
+fun EmptyCheck() {
+    val ring = Tokens.colors.hairline
+    Canvas(Modifier.size(Tokens.check)) {
+        val w = 2f * size.minDimension / 28f
+        drawCircle(ring, radius = (size.minDimension - w) / 2, style = Stroke(w))
     }
 }

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.1
+
+- Permissions: a screen that lists every access Clipshot uses (photos, and in the full version all files access and the accessibility service), why, and which feature depends on it. A check shows what is on. One tap turns it on, and when it is on, the same tap opens the exact settings page to turn it off. Open it from the main screen or from About.
+- When an access is turned off, Clipshot says calmly what stops working and how to turn it back on. It never asks again on its own.
+
 ## 1.3.0
 
 - About: our principles, the installed version and what's new, the date of the last security review, the signing certificate of the installed app (compare it with SECURITY.md), and links to the source code, the privacy policy and private security reporting.

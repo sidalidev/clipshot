@@ -55,7 +55,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * About, and "What leaves your device" (the same activity with [EXTRA_LEAVES]).
+ * About, "What leaves your device" and Permissions (the same activity with [EXTRA_PAGE]).
  * Every link leaves the app only on a tap, and opens in the browser or the mail app: Clipshot itself
  * has no internet permission.
  */
@@ -63,10 +63,11 @@ class AboutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val leaves = intent.getBooleanExtra(EXTRA_LEAVES, false)
+        val page = intent.getStringExtra(EXTRA_PAGE)
         setContent {
             ClipshotTheme {
-                if (leaves) Leaves(onClose = ::finish)
+                if (page == PAGE_LEAVES) Leaves(onClose = ::finish)
+                else if (page == PAGE_PERMISSIONS) Permissions(onClose = ::finish)
                 else About(onClose = ::finish, onErased = {
                     Toast.makeText(this, R.string.erased, Toast.LENGTH_SHORT).show()
                     finish()
@@ -76,9 +77,11 @@ class AboutActivity : ComponentActivity() {
     }
 
     companion object {
-        private const val EXTRA_LEAVES = "leaves"
-        fun open(ctx: Context, leaves: Boolean = false) =
-            ctx.startActivity(Intent(ctx, AboutActivity::class.java).putExtra(EXTRA_LEAVES, leaves))
+        private const val EXTRA_PAGE = "page"
+        const val PAGE_LEAVES = "leaves"
+        const val PAGE_PERMISSIONS = "permissions"
+        fun open(ctx: Context, page: String? = null) =
+            ctx.startActivity(Intent(ctx, AboutActivity::class.java).putExtra(EXTRA_PAGE, page))
     }
 }
 
@@ -115,7 +118,7 @@ fun securityReviewDate(): String =
     LocalDate.parse(BuildConfig.SECURITY_REVIEW).format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH))
 
 @Composable
-private fun Page(close: String, title: String, onClose: () -> Unit, content: @Composable () -> Unit) {
+internal fun Page(close: String, title: String, onClose: () -> Unit, content: @Composable () -> Unit) {
     Column(
         // Content scrolls below the status bar, not under it.
         Modifier.fillMaxSize()
@@ -134,7 +137,7 @@ private fun Page(close: String, title: String, onClose: () -> Unit, content: @Co
 }
 
 @Composable
-private fun Hairline() {
+internal fun Hairline() {
     Spacer(Modifier.height(Tokens.space4))
     Box(Modifier.fillMaxWidth().height(Tokens.hairline).background(Tokens.colors.hairline))
     Spacer(Modifier.height(Tokens.space4))
@@ -168,7 +171,9 @@ private fun About(onClose: () -> Unit, onErased: () -> Unit) {
                 Spacer(Modifier.height(Tokens.space8))
             }
             Hairline()
-            LinkRow(stringResource(R.string.leaves_title), trailing = "›") { AboutActivity.open(ctx, leaves = true) }
+            LinkRow(stringResource(R.string.leaves_title), trailing = "›") { AboutActivity.open(ctx, AboutActivity.PAGE_LEAVES) }
+            Hairline()
+            LinkRow(stringResource(R.string.perms_title), trailing = "›") { AboutActivity.open(ctx, AboutActivity.PAGE_PERMISSIONS) }
         }
 
         Card {
