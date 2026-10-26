@@ -1,0 +1,1 @@
+One main switch at the top: Paused stops everything, even after a restart, until you turn it back on. The tile shows the same state, and TalkBack reads it.

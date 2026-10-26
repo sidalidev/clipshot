@@ -40,6 +40,12 @@ class Cleanup : JobService() {
             ctx.getSystemService(JobScheduler::class.java).schedule(info)
         }
 
+        /** Paused: stop the timer and forget pending removals. Those screenshots stay in the gallery. */
+        fun cancel(ctx: Context) {
+            ctx.getSystemService(JobScheduler::class.java).cancel(ID)
+            Prefs.clearPendingDeletes(ctx)
+        }
+
         fun run(ctx: Context) {
             val now = System.currentTimeMillis()
             val pending = Prefs.pendingDeletes(ctx)

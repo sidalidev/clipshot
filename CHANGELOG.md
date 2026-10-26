@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2
+
+- One main switch: the On / Paused card at the top of the main screen stops everything in one tap. Paused, nothing runs in the background, a pending gallery removal is cancelled (that screenshot stays in your photos), and Clipshot stays paused after a restart until you turn it back on. One tap resumes it, nothing to set up again.
+- The Quick Settings tile and the main screen always show the same state, and TalkBack reads it ("On" or "Paused"). The whole card is the switch.
+
 ## 1.3.1
 
 - Permissions: a screen that lists every access Clipshot uses (photos, and in the full version all files access and the accessibility service), why, and which feature depends on it. A check shows what is on. One tap turns it on, and when it is on, the same tap opens the exact settings page to turn it off. Open it from the main screen or from About.

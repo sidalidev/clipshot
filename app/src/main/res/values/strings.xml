@@ -9,7 +9,7 @@
     <string name="status_on">On</string>
     <string name="status_on_body">Every screenshot goes to the clipboard</string>
     <string name="status_off">Paused</string>
-    <string name="status_off_body">Screenshots are not copied</string>
+    <string name="status_off_body">Nothing runs in the background. New screenshots stay in your photos and are not copied.</string>
     <string name="last_copied">Last copied</string>
     <string name="none_yet">Nothing yet</string>
     <string name="none_yet_body">Take a screenshot to try it</string>

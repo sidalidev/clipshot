@@ -29,6 +29,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -73,6 +74,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -155,7 +160,7 @@ private fun Screen() {
                     ctx.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", ctx.packageName, null)))
                 })
             else Column(verticalArrangement = Arrangement.spacedBy(Tokens.cardGap)) {
-                StatusCard(enabled) { v -> Prefs.setEnabled(ctx, v); enabled = v; ShotJob.schedule(ctx) }
+                StatusCard(enabled) { v -> MainSwitch.set(ctx, v); enabled = v }
                 LastCard(thumb, lastTime, count)
                 OptionsCard(
                     removeOn = removeOn, canDelete = canDelete,
@@ -209,18 +214,26 @@ private fun AccessCard(asked: Boolean, onAsk: () -> Unit, onSettings: () -> Unit
 
 @Composable
 private fun StatusCard(enabled: Boolean, onToggle: (Boolean) -> Unit) {
+    val view = LocalView.current
+    val state = stringResource(if (enabled) R.string.status_on else R.string.status_off)
     Card {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        // The whole row is the switch: one target, and TalkBack reads the name, the sentence and "On" or "Paused".
+        Row(
+            Modifier.fillMaxWidth()
+                .toggleable(value = enabled, role = Role.Switch) { v -> toggleHaptic(view, v); onToggle(v) }
+                .semantics(mergeDescendants = true) { stateDescription = state },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             StatusDot(if (enabled) Tokens.colors.success else Tokens.colors.hairline, live = enabled)
             Spacer(Modifier.width(Tokens.space12))
             Column(Modifier.weight(1f)) {
-                Text(stringResource(if (enabled) R.string.status_on else R.string.status_off), style = MaterialTheme.typography.titleMedium)
+                Text(state, style = MaterialTheme.typography.titleMedium)
                 Text(
                     stringResource(if (enabled) R.string.status_on_body else R.string.status_off_body),
                     style = MaterialTheme.typography.bodyMedium, color = Tokens.colors.secondaryText,
                 )
             }
-            GreenSwitch(enabled, onToggle)
+            GreenSwitch(enabled, null)
         }
     }
 }

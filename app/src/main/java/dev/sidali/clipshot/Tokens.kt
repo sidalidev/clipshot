@@ -358,24 +358,26 @@ fun TextLink(text: String, onClick: () -> Unit) {
 
 /** Green switch, with a tick as it flips. */
 @Composable
-fun GreenSwitch(checked: Boolean, onChange: (Boolean) -> Unit) {
+fun GreenSwitch(checked: Boolean, onChange: ((Boolean) -> Unit)?) {
     val view = LocalView.current
     Switch(
         checked = checked,
-        onCheckedChange = {
-            view.performHapticFeedback(
-                when {
-                    Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> HapticFeedbackConstants.CLOCK_TICK
-                    it -> HapticFeedbackConstants.TOGGLE_ON
-                    else -> HapticFeedbackConstants.TOGGLE_OFF
-                },
-            )
-            onChange(it)
-        },
+        onCheckedChange = onChange?.let { f -> { v: Boolean -> toggleHaptic(view, v); f(v) } },
         colors = SwitchDefaults.colors(
             checkedTrackColor = Tokens.colors.success, checkedThumbColor = Tokens.colors.onSuccess,
             checkedIconColor = Tokens.colors.success, checkedBorderColor = Color.Transparent,
         ),
+    )
+}
+
+/** Toggle feel: distinct on and off ticks where the system has them. */
+fun toggleHaptic(view: android.view.View, on: Boolean) {
+    view.performHapticFeedback(
+        when {
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> HapticFeedbackConstants.CLOCK_TICK
+            on -> HapticFeedbackConstants.TOGGLE_ON
+            else -> HapticFeedbackConstants.TOGGLE_OFF
+        },
     )
 }
 
