@@ -1,0 +1,1 @@
+Clipshot's own colors: Sapin green, the same as the new icon, in light and dark, readable everywhere. Flat and rounded, new type (Bricolage Grotesque and Figtree). Follows your text size.

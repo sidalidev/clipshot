@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.0
+
+- Clipshot's own colors: Sapin green, the same as the new icon, in light and dark, on a warm cream or deep green page. They no longer change with the wallpaper. Every text and background pair meets WCAG AA, checked by a test.
+- New icon: the four rounded corners of a capture around a lens, cream on flat Sapin, with a themed version. The Quick Settings tiles use the same drawing.
+- Flat and rounded everywhere: no gradient or shadow, rounder cards, tinted capsules with a full size touch target.
+- New type: Bricolage Grotesque for titles and Figtree for text, both under the SIL Open Font License, bundled in the app. They follow your phone's text size.
+
 ## 1.3.2
 
 - One main switch: the On / Paused card at the top of the main screen stops everything in one tap. Paused, nothing runs in the background, a pending gallery removal is cancelled (that screenshot stays in your photos), and Clipshot stays paused after a restart until you turn it back on. One tap resumes it, nothing to set up again.

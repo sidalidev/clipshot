@@ -64,7 +64,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.StrokeCap
@@ -224,7 +223,7 @@ private fun StatusCard(enabled: Boolean, onToggle: (Boolean) -> Unit) {
                 .semantics(mergeDescendants = true) { stateDescription = state },
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            StatusDot(if (enabled) Tokens.colors.success else Tokens.colors.hairline, live = enabled)
+            StatusDot(if (enabled) Tokens.colors.success else Tokens.colors.outline, live = enabled)
             Spacer(Modifier.width(Tokens.space12))
             Column(Modifier.weight(1f)) {
                 Text(state, style = MaterialTheme.typography.titleMedium)
@@ -349,8 +348,7 @@ private fun Hero(active: Boolean, modifier: Modifier) {
         val land = if (!active) 0f else (seg(0.68f, 0.74f) - seg(0.82f, 0.95f))
         val check = if (!active) 0f else (seg(0.72f, 0.80f) - seg(0.90f, 0.98f))
 
-        // phone body
-        drawRoundRect(c.shadow.copy(alpha = 0.10f), phoneTL + Offset(0f, 8 * u), Size(phoneW, phoneH), CornerRadius(26 * u))
+        // phone body (flat: no shadow, no gradient)
         drawRoundRect(c.heroBody, phoneTL, Size(phoneW, phoneH), CornerRadius(26 * u))
         // side buttons (right edge): power + volume down, pushed in while pressed
         val btnX = phoneTL.x + phoneW - 1.5f * u - press * 3.5f * u
@@ -358,7 +356,7 @@ private fun Hero(active: Boolean, modifier: Modifier) {
         drawRoundRect(c.heroBody, Offset(btnX, phoneTL.y + 92 * u), Size(5 * u, 40 * u), CornerRadius(2.5f * u))
         // screen
         val sTL = phoneTL + Offset(6 * u, 6 * u); val sSize = Size(phoneW - 12 * u, phoneH - 12 * u)
-        drawScreen(sTL, sSize, 20 * u, c.heroTop, c.heroBottom, c.onHero, u)
+        drawScreen(sTL, sSize, 20 * u, c.heroScreen, c.onHero, c.honey, u)
         if (flash > 0f) drawRoundRect(c.onHero.copy(alpha = flash * 0.85f), sTL, sSize, CornerRadius(20 * u))
 
         // clipboard
@@ -366,7 +364,6 @@ private fun Hero(active: Boolean, modifier: Modifier) {
         val bTL = boardC - Offset(bw / 2, bh / 2)
         val scale = 1f + land * 0.06f
         val bSize = Size(bw * scale, bh * scale); val bTL2 = boardC - Offset(bSize.width / 2, bSize.height / 2)
-        drawRoundRect(c.shadow.copy(alpha = 0.06f), bTL2 + Offset(0f, 6 * u), bSize, CornerRadius(18 * u))
         drawRoundRect(c.card, bTL2, bSize, CornerRadius(18 * u))
         drawRoundRect(c.hairline, bTL2, bSize, CornerRadius(18 * u), style = Stroke(1.2f * u))
         drawRoundRect(c.secondaryText.copy(alpha = 0.55f), Offset(boardC.x - 18 * u, bTL2.y - 7 * u), Size(36 * u, 14 * u), CornerRadius(7 * u))
@@ -387,8 +384,7 @@ private fun Hero(active: Boolean, modifier: Modifier) {
             )
             val w = sSize.width * (1f - 0.5f * fly); val h = sSize.height * (1f - 0.62f * fly)
             val tl = p - Offset(w / 2, h / 2)
-            drawRoundRect(c.shadow.copy(alpha = 0.18f * fly), tl + Offset(0f, 5 * u), Size(w, h), CornerRadius(12 * u))
-            drawScreen(tl, Size(w, h), 12 * u, c.heroTop, c.heroBottom, c.onHero, u * (1f - 0.4f * fly))
+            drawScreen(tl, Size(w, h), 12 * u, c.heroScreen, c.onHero, c.honey, u * (1f - 0.4f * fly))
             drawRoundRect(c.onHero, tl, Size(w, h), CornerRadius(12 * u), style = Stroke(2.5f * u))
         }
         // check mark
@@ -401,11 +397,13 @@ private fun Hero(active: Boolean, modifier: Modifier) {
     }
 }
 
-private fun DrawScope.drawScreen(tl: Offset, s: Size, r: Float, top: Color, bot: Color, ink: Color, u: Float) {
-    drawRoundRect(Brush.verticalGradient(listOf(top, bot), tl.y, tl.y + s.height), tl, s, CornerRadius(r))
-    // a few soft "content" blocks so it reads as a screenshot
+/** A screen in flat Sapin with a few rounded "content" blocks, one of them honey, so it reads as a screenshot. */
+private fun DrawScope.drawScreen(tl: Offset, s: Size, r: Float, fill: Color, ink: Color, honey: Color, u: Float) {
+    drawRoundRect(fill, tl, s, CornerRadius(r))
     val pad = s.width * 0.14f
-    drawRoundRect(ink.copy(alpha = 0.85f), tl + Offset(pad, s.height * 0.16f), Size(s.width * 0.5f, s.height * 0.05f), CornerRadius(4 * u))
-    drawRoundRect(ink.copy(alpha = 0.45f), tl + Offset(pad, s.height * 0.26f), Size(s.width * 0.72f, s.height * 0.04f), CornerRadius(4 * u))
-    drawRoundRect(ink.copy(alpha = 0.25f), tl + Offset(pad, s.height * 0.38f), Size(s.width - 2 * pad, s.height * 0.32f), CornerRadius(10 * u))
+    val bar = s.height * 0.05f
+    drawRoundRect(ink.copy(alpha = 0.9f), tl + Offset(pad, s.height * 0.16f), Size(s.width * 0.5f, bar), CornerRadius(bar / 2))
+    drawRoundRect(ink.copy(alpha = 0.45f), tl + Offset(pad, s.height * 0.26f), Size(s.width * 0.72f, s.height * 0.04f), CornerRadius(s.height * 0.02f))
+    drawRoundRect(honey, tl + Offset(pad, s.height * 0.38f), Size(s.width - 2 * pad, s.height * 0.32f), CornerRadius(10 * u))
+    drawRoundRect(ink.copy(alpha = 0.3f), tl + Offset(pad, s.height * 0.76f), Size(s.width * 0.4f, s.height * 0.04f), CornerRadius(s.height * 0.02f))
 }

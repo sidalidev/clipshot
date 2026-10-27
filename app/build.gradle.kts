@@ -23,8 +23,8 @@ android {
         applicationId = "dev.sidali.clipshot"
         minSdk = 30
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.3.2"
+        versionCode = 8
+        versionName = "1.4.0"
         buildConfigField("String", "SECURITY_REVIEW", "\"$securityReview\"")
     }
     signingConfigs {

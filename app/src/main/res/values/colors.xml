@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Launch window: the page color of the fallback palette (Android 11, no wallpaper colors). -->
-    <color name="bg">#FFEFEDF4</color>
+    <!-- Launch window: the page color (Crème miel), so the first frame has no flash. -->
+    <color name="bg">#FFFBF7EF</color>
+    <!-- Clipshot's color (Sapin), the background of the app icon. -->
+    <color name="sapin">#FF2F5D46</color>
 </resources>

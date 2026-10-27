@@ -51,6 +51,7 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="contact">Contact</string>
     <string name="made_by">Made by Sid · sidali.dev</string>
+    <string name="credits_fonts">Type: Bricolage Grotesque and Figtree, under the SIL Open Font License.</string>
     <string name="no_app_for_link">No app on this phone can open this link.</string>
 
     <string name="erase_title">Erase everything</string>

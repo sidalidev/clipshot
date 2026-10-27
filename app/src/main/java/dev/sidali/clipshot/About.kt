@@ -222,11 +222,13 @@ private fun About(onClose: () -> Unit, onErased: () -> Unit) {
             Text(stringResource(R.string.erase_hint), style = MaterialTheme.typography.bodySmall, color = Tokens.colors.secondaryText)
         }
 
-        Spacer(Modifier.height(Tokens.space8))
-        Text(
-            stringResource(R.string.made_by), style = MaterialTheme.typography.bodySmall, color = Tokens.colors.secondaryText,
-            textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
-        )
+        // Footer: who made it, and the credits for the bundled fonts, as one block.
+        Column(Modifier.fillMaxWidth().padding(top = Tokens.space8), verticalArrangement = Arrangement.spacedBy(Tokens.space4)) {
+            for (line in listOf(R.string.made_by, R.string.credits_fonts)) Text(
+                stringResource(line), style = MaterialTheme.typography.bodySmall, color = Tokens.colors.secondaryText,
+                textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(),
+            )
+        }
     }
 
     if (confirm) EraseDialog(

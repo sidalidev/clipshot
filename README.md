@@ -27,7 +27,7 @@ Android takes the screenshot as usual, Clipshot only hands it to the clipboard. 
 - **Capture** (optional): a Quick Settings tile and the floating accessibility button take a screenshot in one tap, and it goes to the clipboard like any other. See [The Capture service](#the-capture-service).
 - **Pause tile** in Quick Settings to pause and resume.
 - **About**: our principles, what leaves your device (nothing), the signing certificate, and **Erase everything**, which resets Clipshot to its first launch.
-- Your phone's colors (Material You), light and dark, themed icon. English.
+- Its own colors: Sapin green, the same as the icon, in light and dark, with a themed icon. Flat, rounded, set in Bricolage Grotesque and Figtree. English.
 
 ## Install
 
@@ -83,4 +83,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Security issues: [SECURITY.md](SECURITY.
 
 ## License
 
-[Apache-2.0](LICENSE)
+[Apache-2.0](LICENSE). Fonts and icon: see [ASSETS.md](ASSETS.md).

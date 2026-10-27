@@ -11,7 +11,7 @@ Clipshot copies every new screenshot to the clipboard the moment Android saves i
 * Capture: take a screenshot from a Quick Settings tile or the floating accessibility button, straight to the clipboard.
 * Remove from gallery: one minute after the copy, the screenshot is deleted from your photos and only lives on the clipboard (needs "All files access", used for this alone).
 * Quick Settings tile to pause and resume.
-* Your phone's colors (Material You), light and dark, themed icon.
+* Its own colors, the same green as its icon, in light and dark. Themed icon.
 
 <b>About the Capture service</b>
 Android only lets apps take a screenshot through an accessibility service. Clipshot's service receives no accessibility events and cannot read the content of any window: it does not know what is on your screen or what you type. It only closes the Quick Settings panel and presses the screenshot button. It is off until you turn it on. Not included in the Google Play version.

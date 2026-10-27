@@ -1,7 +1,7 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <!-- Capture tile: the four corners of a screenshot frame, and a dot for the shutter. -->
-    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000"
-        android:pathData="M4,9V6a2,2 0,0 1,2 -2h3M15,4h3a2,2 0,0 1,2 2v3M20,15v3a2,2 0,0 1,-2 2h-3M9,20H6a2,2 0,0 1,-2 -2v-3"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M12,8.5a3.5,3.5 0,1 1,0 7a3.5,3.5 0,1 1,0 -7z"/>
+    <!-- Capture tile: the same corners, and a filled shutter instead of the lens ring. -->
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2.1" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000"
+        android:pathData="M4.5,9V7a2.5,2.5 0,0 1,2.5 -2.5h2M15,4.5h2A2.5,2.5 0,0 1,19.5 7v2M19.5,15v2a2.5,2.5 0,0 1,-2.5 2.5h-2M9,19.5H7A2.5,2.5 0,0 1,4.5 17v-2" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M12,8.2a3.8,3.8 0,1 1,0 7.6a3.8,3.8 0,1 1,0 -7.6z" />
 </vector>
