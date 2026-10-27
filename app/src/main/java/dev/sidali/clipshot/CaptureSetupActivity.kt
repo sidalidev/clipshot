@@ -21,8 +21,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
@@ -63,8 +65,10 @@ private fun CaptureSetup(onClose: () -> Unit) {
     LaunchedEffect(Unit) { while (true) { on = CaptureService.isEnabled(ctx); delay(1000) } }
 
     Column(
-        Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .windowInsetsPadding(WindowInsets.safeDrawing).padding(horizontal = Tokens.gutter),
+        Modifier.fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Top + WindowInsetsSides.Horizontal))
+            .verticalScroll(rememberScrollState())
+            .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom)).padding(horizontal = Tokens.gutter),
     ) {
         Spacer(Modifier.height(Tokens.space8))
         TextLink(stringResource(R.string.close), onClose)
