@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -261,6 +262,7 @@ private fun EraseDialog(onDismiss: () -> Unit, onErase: () -> Unit) {
                     focusedBorderColor = c.danger, cursorColor = c.danger,
                     unfocusedBorderColor = c.hairline,
                 ),
+                shape = RoundedCornerShape(Tokens.buttonRadius),
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(Tokens.space16))
